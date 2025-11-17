@@ -29,6 +29,19 @@
                     <input type="hidden" name="id" value="${major.id}">
                 </c:if>
 
+                <!-- Nếu đang thêm/sửa trong ngữ cảnh 1 khoa cụ thể, giữ facultyId -->
+                <c:choose>
+                    <c:when test="${not empty faculty}">
+                        <input type="hidden" name="facultyId" value="${faculty.id}" />
+                        <p>Thuộc Khoa: <strong>${faculty.name}</strong></p>
+                    </c:when>
+                    <c:otherwise>
+                        <c:if test="${not empty param.facultyId}">
+                            <input type="hidden" name="facultyId" value="${param.facultyId}" />
+                        </c:if>
+                    </c:otherwise>
+                </c:choose>
+
                 <div class="form-group">
                     <label for="name">Tên Ngành:</label>
                     <input type="text" id="name" name="name" value="${major.name}" required>
@@ -36,24 +49,33 @@
 
                 <div class="form-group">
                     <label for="facultyId">Thuộc Khoa:</label>
-                    <select id="facultyId" name="facultyId" required>
-                        <option value="">-- Chọn Khoa --</option>
-                        <c:forEach var="faculty" items="${faculties}">
-                            <option value="${faculty.id}"
-                                ${major != null && major.facultyId == faculty.id ? 'selected' : ''}>
-                                ${faculty.name}
-                            </option>
-                        </c:forEach>
-                    </select>
+                    <!-- Nếu đã có context faculty thì không hiển thị select, ngược lại chọn được -->
+                    <c:if test="${empty faculty}">
+                        <select id="facultyId" name="facultyId" required>
+                            <option value="">-- Chọn Khoa --</option>
+                            <c:forEach var="facultyItem" items="${faculties}">
+                                <option value="${facultyItem.id}"
+                                    ${major != null && major.facultyId == facultyItem.id ? 'selected' : ''}>
+                                    ${facultyItem.name}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </c:if>
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Lưu</button>
-                    <a href="major-list" class="btn btn-secondary">Hủy</a>
+                    <c:choose>
+                        <c:when test="${not empty faculty}">
+                            <a href="major-list?facultyId=${faculty.id}" class="btn btn-secondary">Hủy</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="major-list" class="btn btn-secondary">Hủy</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </form>
         </main>
     </div>
 </body>
 </html>
-

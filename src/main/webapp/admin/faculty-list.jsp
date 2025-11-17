@@ -24,6 +24,20 @@
         <main class="admin-content">
             <h2>Danh Sách Khoa</h2>
 
+            <!-- Hiển thị credentials admin vừa tạo (nếu có) -->
+            <c:if test="${not empty sessionScope.newFacultyAdmin}">
+                <div style="padding:12px; border:1px solid #4caf50; background:#f0fff4; margin-bottom:12px;">
+                    <strong>Tài khoản admin khoa mới đã được tạo:</strong>
+                    <p>Username: <b>${sessionScope.newFacultyAdmin.username}</b></p>
+                    <p>Password: <b>${sessionScope.newFacultyAdmin.password}</b></p>
+                    <p>Thuộc khoa: <b>${sessionScope.newFacultyAdmin.fullName}</b></p>
+                </div>
+                <%-- Xóa session attribute để chỉ hiển thị 1 lần --%>
+                <%
+                    session.removeAttribute("newFacultyAdmin");
+                %>
+            </c:if>
+
             <div class="admin-actions">
                 <a href="faculty-list?action=new" class="btn btn-primary">+ Thêm Khoa Mới</a>
             </div>
@@ -47,6 +61,8 @@
                                 <a href="faculty-list?action=edit&id=${faculty.id}" class="btn btn-sm btn-warning">Sửa</a>
                                 <a href="faculty-list?action=delete&id=${faculty.id}" class="btn btn-sm btn-danger"
                                    onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                <!-- New: Manage majors for this faculty -->
+                                <a href="major-list?facultyId=${faculty.id}" class="btn btn-sm btn-info">Quản Lý Ngành</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -56,4 +72,3 @@
     </div>
 </body>
 </html>
-

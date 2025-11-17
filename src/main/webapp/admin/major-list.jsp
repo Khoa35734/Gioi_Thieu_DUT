@@ -24,8 +24,23 @@
         <main class="admin-content">
             <h2>Danh Sách Ngành</h2>
 
+            <!-- Nếu đang quản lý theo 1 khoa cụ thể, hiển thị thông tin khoa -->
+            <c:if test="${not empty faculty}">
+                <div class="info">
+                    <strong>Quản lý ngành cho khoa:</strong> ${faculty.name}
+                </div>
+            </c:if>
+
             <div class="admin-actions">
-                <a href="major-list?action=new" class="btn btn-primary">+ Thêm Ngành Mới</a>
+                <c:choose>
+                    <c:when test="${not empty faculty}">
+                        <a href="major-list?action=new&facultyId=${faculty.id}" class="btn btn-primary">+ Thêm Ngành Mới</a>
+                        <a href="major-list" class="btn btn-secondary">Xem Tất Cả Ngành</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="major-list?action=new" class="btn btn-primary">+ Thêm Ngành Mới</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
             <table class="admin-table">
@@ -44,9 +59,18 @@
                             <td>${major.name}</td>
                             <td>${major.facultyName}</td>
                             <td>
-                                <a href="major-list?action=edit&id=${major.id}" class="btn btn-sm btn-warning">Sửa</a>
-                                <a href="major-list?action=delete&id=${major.id}" class="btn btn-sm btn-danger"
-                                   onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                <c:choose>
+                                    <c:when test="${not empty faculty}">
+                                        <a href="major-list?action=edit&id=${major.id}&facultyId=${faculty.id}" class="btn btn-sm btn-warning">Sửa</a>
+                                        <a href="major-list?action=delete&id=${major.id}&facultyId=${faculty.id}" class="btn btn-sm btn-danger"
+                                           onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="major-list?action=edit&id=${major.id}" class="btn btn-sm btn-warning">Sửa</a>
+                                        <a href="major-list?action=delete&id=${major.id}" class="btn btn-sm btn-danger"
+                                           onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>
@@ -56,4 +80,3 @@
     </div>
 </body>
 </html>
-

@@ -1,70 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-</html>
-</body>
-    </div>
-        </p>
-            <a href="${pageContext.request.contextPath}/home">← Quay về trang chủ</a>
-        <p style="margin-top: 15px;">
-
-        </p>
-            Demo: username = <strong>admin</strong>, password = <strong>admin123</strong>
-        <p style="margin-top: 20px; color: #666;">
-
-        </form>
-            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
-
-            </div>
-                <input type="password" id="password" name="password" required>
-                <label for="password">Mật khẩu:</label>
-            <div class="form-group">
-
-            </div>
-                <input type="text" id="username" name="username" required>
-                <label for="username">Tên đăng nhập:</label>
-            <div class="form-group">
-        <form method="post" action="login">
-
-        <% } %>
-            <div class="error-message">${error}</div>
-        <% if (request.getAttribute("error") != null) { %>
-
-        <h2>Đăng Nhập Admin</h2>
-    <div class="login-container">
-<body>
-</head>
-    </style>
-        }
-            margin-bottom: 15px;
-            color: red;
-        .error-message {
-        }
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            width: 100%;
-        .form-group input {
-        }
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        .form-group label {
-        }
-            margin-bottom: 15px;
-        .form-group {
-        }
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 30px;
-            margin: 100px auto;
-            max-width: 400px;
-        .login-container {
-    <style>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <title>Đăng Nhập Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    // Lấy danh sách admin từ AdminDAO (demo in-memory)
+    dao.AdminDAO adminDAO = new dao.AdminDAO();
+    java.util.List demoAdmins = adminDAO.getAllAdmins();
+    request.setAttribute("demoAdmins", demoAdmins);
+%>
+<html>
 <head>
-<html lang="vi">
-<!DOCTYPE html>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form action="${pageContext.request.contextPath}/admin/login" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+            <% if (request.getAttribute("error") != null) { %>
+                <p class="error"><%= request.getAttribute("error") %></p>
+            <% } %>
+        </form>
 
+        <!-- Dynamic demo accounts for testing (no DB) -->
+        <div class="demo-accounts" style="margin-top:20px; padding:12px; border:1px dashed #ccc; background:#fafafa;">
+            <h4>Demo accounts (no DB) — dùng để test</h4>
+            <p>Danh sách tài khoản hiện có (tài khoản mới tạo sẽ xuất hiện ở đây):</p>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead>
+                    <tr>
+                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Username</th>
+                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Password</th>
+                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Quyền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="adm" items="${demoAdmins}">
+                        <tr>
+                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.username}</td>
+                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.password}</td>
+                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.role}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <p style="margin-top:8px; color:#666;">Ghi chú: những tài khoản này được lưu trong bộ nhớ ứng dụng (AdminDAO) cho mục đích demo.</p>
+        </div>
+    </div>
+</body>
+</html>

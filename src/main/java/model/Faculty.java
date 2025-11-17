@@ -1,10 +1,14 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Faculty {
 
     private int id;
     private String name;
     private String description;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     // Constructor rỗng (bắt buộc cho Bean)
     public Faculty() {
@@ -39,5 +43,13 @@ public class Faculty {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

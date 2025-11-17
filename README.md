@@ -66,6 +66,11 @@ Gioi_thieu_DUT/
 - ✅ Quản lý tin tức (CRUD)
 - ✅ Upload ảnh với CKEditor
 
+## Phân Quyền & Vai Trò
+- Có 2 đối tượng chính: `Admin` và `Major` (phụ trách từng khoa).
+- Admin: CRUD tất cả bài viết; đồng thời CRUD tài khoản các Major để họ có thể đăng bài.
+- Major: Quản lý bài viết của khoa mình trên trang con của khoa (chỉ thao tác trong phạm vi khoa).
+
 ## Hướng Dẫn Cài Đặt
 
 ### 1. Yêu Cầu Hệ Thống
