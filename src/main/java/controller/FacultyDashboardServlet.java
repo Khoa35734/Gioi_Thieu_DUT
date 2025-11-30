@@ -40,9 +40,18 @@ public class FacultyDashboardServlet extends HttpServlet {
             return;
         }
 
+        // Check if faculty admin has facultyId
+        Integer facultyId = admin.getFacultyId();
+        if (facultyId == null) {
+            System.out.println("ERROR: Faculty admin has no facultyId assigned!");
+            request.setAttribute("error", "Tài khoản admin khoa chưa được gán khoa. Vui lòng liên hệ Super Admin.");
+            request.getRequestDispatcher("/admin/faculty/faculty-dashboard.jsp").forward(request, response);
+            return;
+        }
+
         // Get faculty statistics
-        List<News> facultyNews = newsDAO.getNewsByFaculty(admin.getFacultyId());
-        List<Major> facultyMajors = majorDAO.getMajorsByFaculty(admin.getFacultyId());
+        List<News> facultyNews = newsDAO.getNewsByFaculty(facultyId);
+        List<Major> facultyMajors = majorDAO.getMajorsByFaculty(facultyId);
         
         request.setAttribute("totalNews", facultyNews.size());
         request.setAttribute("totalMajors", facultyMajors.size());
@@ -67,4 +76,3 @@ public class FacultyDashboardServlet extends HttpServlet {
         request.getRequestDispatcher("/admin/faculty/faculty-dashboard.jsp").forward(request, response);
     }
 }
-

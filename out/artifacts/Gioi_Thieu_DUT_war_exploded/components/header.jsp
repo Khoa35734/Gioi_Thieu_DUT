@@ -15,14 +15,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-end">
-                    <div class="social-links d-flex align-items-center">
+                    <div class="social-links d-flex align-items-center justify-content-end">
                         <a href="#" class="text-white me-3" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="text-white me-3" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="text-white me-3" aria-label="Zalo"><i class="bi bi-chat-dots-fill"></i></a>
-                        <span class="mx-2 text-white-50">|</span>
-                        <a href="${pageContext.request.contextPath}/admin/login" class="text-white" aria-label="Admin Login">
-                            <i class="bi bi-person-circle me-1"></i>Admin
-                        </a>
+                        <a href="#" class="text-white" aria-label="Zalo"><i class="bi bi-chat-dots-fill"></i></a>
                     </div>
                 </div>
             </div>

@@ -1,15 +1,70 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-    // Lấy danh sách admin từ AdminDAO (demo in-memory)
-    dao.AdminDAO adminDAO = new dao.AdminDAO();
-    java.util.List demoAdmins = adminDAO.getAllAdmins();
-    request.setAttribute("demoAdmins", demoAdmins);
-%>
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <title>Admin Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f7f6;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: #d9534f;
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -17,7 +72,7 @@
         <form action="${pageContext.request.contextPath}/admin/login" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required value="${param.username}">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -26,35 +81,10 @@
             <div class="form-group">
                 <button type="submit">Login</button>
             </div>
-            <% if (request.getAttribute("error") != null) { %>
-                <p class="error"><%= request.getAttribute("error") %></p>
-            <% } %>
+            <c:if test="${not empty error}">
+                <p class="error">${error}</p>
+            </c:if>
         </form>
-
-        <!-- Dynamic demo accounts for testing (no DB) -->
-        <div class="demo-accounts" style="margin-top:20px; padding:12px; border:1px dashed #ccc; background:#fafafa;">
-            <h4>Demo accounts (no DB) — dùng để test</h4>
-            <p>Danh sách tài khoản hiện có (tài khoản mới tạo sẽ xuất hiện ở đây):</p>
-            <table style="width:100%; border-collapse:collapse; font-size:14px;">
-                <thead>
-                    <tr>
-                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Username</th>
-                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Password</th>
-                        <th style="text-align:left; padding:6px; border-bottom:1px solid #ddd">Quyền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="adm" items="${demoAdmins}">
-                        <tr>
-                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.username}</td>
-                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.password}</td>
-                            <td style="padding:6px; border-bottom:1px solid #eee">${adm.role}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <p style="margin-top:8px; color:#666;">Ghi chú: những tài khoản này được lưu trong bộ nhớ ứng dụng (AdminDAO) cho mục đích demo.</p>
-        </div>
     </div>
 </body>
 </html>

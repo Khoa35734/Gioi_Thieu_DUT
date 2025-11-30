@@ -291,7 +291,12 @@
                     <small class="text-muted">Faculty Administrator</small>
                 </div>
                 <div class="user-avatar">
-                    ${sessionScope.admin.fullName.substring(0,1).toUpperCase()}
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.admin.fullName}">
+                            ${sessionScope.admin.fullName.substring(0,1).toUpperCase()}
+                        </c:when>
+                        <c:otherwise>A</c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -428,7 +433,8 @@
                                     <td>${major.id}</td>
                                     <td><span class="badge bg-primary">${major.majorCode}</span></td>
                                     <td><strong>${major.name}</strong></td>
-                                    <td>${major.description != null ? (major.description.length() > 50 ? major.description.substring(0, 50) + '...' : major.description) : ''}</td>
+                                    <%-- Fixed: Replaced '+' with '.concat()' for string concatenation in EL --%>
+                                    <td>${major.description != null ? (major.description.length() > 50 ? major.description.substring(0, 50).concat('...') : major.description) : ''}</td>
                                     <td>${major.creatorName}</td>
                                     <td><fmt:formatDate value="${major.createdAt}" pattern="dd/MM/yyyy"/></td>
                                     <td>
