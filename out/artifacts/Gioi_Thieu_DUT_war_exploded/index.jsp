@@ -42,6 +42,9 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
+    <!-- Splide.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     
@@ -75,10 +78,13 @@
     <!-- Header -->
     <jsp:include page="components/header.jsp" />
     
+    <!-- Slider Section -->
+    <jsp:include page="components/slider.jsp" />
+    
     <!-- Main Content -->
     <main>
-        <!-- Banner Section -->
-        <jsp:include page="components/banner.jsp" />
+        <!-- Banner Section (can be removed or repurposed) -->
+        <%-- <jsp:include page="components/banner.jsp" /> --%>
         
         <!-- About Section -->
         <jsp:include page="components/section-about.jsp" />
@@ -105,7 +111,29 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Splide.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    
     <!-- Custom JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    
+    <script>
+        // Initialize the Splide slider
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('image-slider')) {
+                new Splide('#image-slider', {
+                    type       : 'loop',
+                    height     : '60vh',
+                    perPage    : 1,
+                    autoplay   : true,
+                    interval   : 5000,
+                    pauseOnHover: true,
+                    arrows     : true,
+                    pagination : true,
+                    cover      : true,
+                }).mount();
+            }
+        });
+    </script>
 </body>
 </html>
