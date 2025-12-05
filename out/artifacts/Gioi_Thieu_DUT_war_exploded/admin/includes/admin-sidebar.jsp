@@ -17,25 +17,16 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title">Quản lý nội dung</div>
             
-            <a href="${pageContext.request.contextPath}/admin/posts" 
-               class="sidebar-link ${pageContext.request.requestURI.contains('posts') && !pageContext.request.requestURI.contains('create') ? 'active' : ''}">
+            <a href="${pageContext.request.contextPath}/admin/news"
+               class="sidebar-link ${pageContext.request.requestURI.contains('news') && !pageContext.request.requestURI.contains('action=new') ? 'active' : ''}">
                 <i class="bi bi-newspaper"></i>
                 <span>Bài viết</span>
             </a>
             
-            <a href="${pageContext.request.contextPath}/admin/posts/create" 
-               class="sidebar-link ${pageContext.request.requestURI.contains('posts/create') ? 'active' : ''}">
+            <a href="${pageContext.request.contextPath}/admin/news?action=new"
+               class="sidebar-link ${param.action == 'new' ? 'active' : ''}">
                 <i class="bi bi-plus-circle"></i>
                 <span>Tạo bài viết mới</span>
-            </a>
-            
-            <a href="${pageContext.request.contextPath}/admin/posts?status=draft" 
-               class="sidebar-link">
-                <i class="bi bi-file-earmark-text"></i>
-                <span>Bài viết nháp</span>
-                <c:if test="${draftCount > 0}">
-                    <span class="badge bg-warning ms-auto">${draftCount}</span>
-                </c:if>
             </a>
         </div>
 
@@ -99,14 +90,14 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Quản lý ngành học</div>
                 
-                <a href="${pageContext.request.contextPath}/admin/majors" 
-                   class="sidebar-link ${pageContext.request.requestURI.contains('majors') ? 'active' : ''}">
+                <a href="${pageContext.request.contextPath}/admin/faculty/majors"
+                   class="sidebar-link ${pageContext.request.requestURI.contains('faculty/majors') ? 'active' : ''}">
                     <i class="bi bi-mortarboard"></i>
                     <span>Danh sách ngành</span>
                 </a>
                 
-                <a href="${pageContext.request.contextPath}/admin/majors/create" 
-                   class="sidebar-link ${pageContext.request.requestURI.contains('majors/create') ? 'active' : ''}">
+                <a href="${pageContext.request.contextPath}/admin/faculty/majors?action=create"
+                   class="sidebar-link ${param.action == 'create' && pageContext.request.requestURI.contains('majors') ? 'active' : ''}">
                     <i class="bi bi-plus-circle"></i>
                     <span>Thêm ngành mới</span>
                 </a>

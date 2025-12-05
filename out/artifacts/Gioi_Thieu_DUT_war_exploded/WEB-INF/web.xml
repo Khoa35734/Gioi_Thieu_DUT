@@ -7,6 +7,11 @@
 
     <display-name>Gioi Thieu DUT</display-name>
 
+    <!-- Listener Declaration -->
+    <listener>
+        <listener-class>listener.AppContextListener</listener-class>
+    </listener>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

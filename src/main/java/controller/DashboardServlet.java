@@ -34,13 +34,19 @@ public class DashboardServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         
         if (session == null || session.getAttribute("admin") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/super/login");
+            response.sendRedirect(request.getContextPath() + "/admin/login");
             return;
         }
 
         Admin admin = (Admin) session.getAttribute("admin");
 
-        // Get statistics based on role
+        // Redirect faculty_admin to their specific dashboard
+        if (admin.isFacultyAdmin()) {
+            response.sendRedirect(request.getContextPath() + "/admin/faculty/dashboard");
+            return;
+        }
+
+        // Get statistics based on role - Super Admin only
         if (admin.isSuperAdmin()) {
             // Super Admin statistics
             List<News> allNews = newsDAO.getAllNews();

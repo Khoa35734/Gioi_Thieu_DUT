@@ -7,6 +7,7 @@ public class Faculty {
     private int id;
     private String name;
     private String description;
+    private String logoUrl; // Added logoUrl field
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -45,10 +46,24 @@ public class Faculty {
         this.description = description;
     }
 
+    // Getter & Setter for logoUrl
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }

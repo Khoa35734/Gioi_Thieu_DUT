@@ -30,14 +30,14 @@
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="${pageContext.request.contextPath}/">
-                <img src="${pageContext.request.contextPath}/assets/img/logo-dut.png" 
+                <img src="${pageContext.request.contextPath}/assets/img/logo-dut.jpg"
                      alt="Logo Đại học Bách Khoa Đà Nẵng" 
-                     height="50" 
+                     height="60"
                      class="me-3"
                      onerror="this.style.display='none'">
                 <div class="logo-text">
+                    <div class="small text-uppercase">Đại học Đà Nẵng</div>
                     <div class="fw-bold fs-5">TRƯỜNG ĐẠI HỌC BÁCH KHOA</div>
-                    <div class="small">Đại học Đà Nẵng</div>
                 </div>
             </a>
 
@@ -133,7 +133,26 @@
 }
 
 .site-header .navbar-brand .logo-text {
-    line-height: 1.3;
+    line-height: 1.2;
+}
+
+.site-header .navbar-brand .logo-text .small {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    opacity: 0.95;
+}
+
+.site-header .navbar-brand .logo-text .fs-5 {
+    font-size: 1.1rem !important;
+    letter-spacing: 0.5px;
+}
+
+.site-header .navbar-brand img {
+    transition: transform 0.3s ease;
+}
+
+.site-header .navbar-brand:hover img {
+    transform: scale(1.05);
 }
 
 .site-header .nav-link {

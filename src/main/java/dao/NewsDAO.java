@@ -82,6 +82,39 @@ public class NewsDAO {
     }
 
     /**
+     * Get random news from all faculties (for homepage featured section)
+     * Randomly selects news from both super admin and faculty admins
+     */
+    public List<News> getRandomNews(int limit) {
+        List<News> newsList = new ArrayList<>();
+        String sql = BASE_SELECT + "ORDER BY RAND() LIMIT ?";
+
+        System.out.println("=== NewsDAO.getRandomNews Debug ===");
+        System.out.println("SQL: " + sql);
+        System.out.println("Limit: " + limit);
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, limit);
+            try (ResultSet rs = stmt.executeQuery()) {
+                int count = 0;
+                while (rs.next()) {
+                    count++;
+                    newsList.add(extractNewsFromResultSet(rs));
+                }
+                System.out.println("Found " + count + " news records");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR in getRandomNews: " + e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("Returning list size: " + newsList.size());
+        System.out.println("===================================");
+        return newsList;
+    }
+
+    /**
      * Get news by ID
      */
     public News getNewsById(int id) {

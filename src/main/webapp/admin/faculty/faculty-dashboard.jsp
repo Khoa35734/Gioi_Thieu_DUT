@@ -348,11 +348,11 @@
                 <div class="table-header">
                     <h5><i class="bi bi-newspaper me-2"></i>Bài viết của khoa</h5>
                     <div class="quick-actions">
-                        <a href="${pageContext.request.contextPath}/admin/faculty/news/create" class="btn btn-faculty">
-                            <i class="bi bi-plus-circle me-2"></i>Thêm bài viết
+                        <a href="${pageContext.request.contextPath}/admin/faculty/news?action=create" class="btn btn-faculty">
+                            <i class="bi bi-plus-circle me-2"></i>Tạo bài viết mới
                         </a>
                         <a href="${pageContext.request.contextPath}/admin/faculty/news" class="btn btn-outline-secondary">
-                            <i class="bi bi-eye me-2"></i>Xem tất cả
+                            <i class="bi bi-list-ul me-2"></i>Xem tất cả
                         </a>
                     </div>
                 </div>
@@ -468,7 +468,7 @@
     <script>
         function deleteNews(id, title) {
             if (confirm('Bạn có chắc muốn xóa bài viết "' + title + '"?\nHành động này không thể hoàn tác.')) {
-                window.location.href = '${pageContext.request.contextPath}/admin/faculty/news/delete?id=' + id;
+                window.location.href = '${pageContext.request.contextPath}/admin/faculty/news?action=delete&id=' + id;
             }
         }
         

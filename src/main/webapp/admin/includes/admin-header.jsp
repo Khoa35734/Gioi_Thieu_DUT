@@ -4,7 +4,7 @@
 <header class="header">
     <div class="header-left">
         <a href="${pageContext.request.contextPath}/admin/dashboard" class="header-logo">
-            <img src="${pageContext.request.contextPath}/assets/img/logo-dut.png" alt="DUT Logo">
+            <img src="${pageContext.request.contextPath}/assets/img/logo-dut.jpg" alt="DUT Logo">
             <span>DUT Admin</span>
         </a>
     </div>

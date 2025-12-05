@@ -49,15 +49,17 @@ public class AdminAuthFilter implements Filter {
             chain.doFilter(request, response);
             return;
         } else if ("faculty_admin".equals(role)) {
-            // Faculty Admin can only access specific paths.
+            // Faculty Admin can access specific paths including news CRUD
             if (path.startsWith(contextPath + "/admin/faculty") ||
                 path.startsWith(contextPath + "/admin/news") ||
-                path.startsWith(contextPath + "/admin/major")) {
+                path.startsWith(contextPath + "/admin/major") ||
+                path.equals(contextPath + "/admin/dashboard") ||
+                path.startsWith(contextPath + "/admin/upload-image")) {
                 chain.doFilter(request, response);
                 return;
             } else {
                 // Redirect to faculty admin dashboard if trying to access other paths.
-                res.sendRedirect(contextPath + "/admin/faculty-dashboard");
+                res.sendRedirect(contextPath + "/admin/faculty/dashboard");
                 return;
             }
         }

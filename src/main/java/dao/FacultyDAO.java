@@ -15,7 +15,7 @@ public class FacultyDAO {
     public List<Faculty> getAllFaculties() {
         List<Faculty> faculties = new ArrayList<>();
         String sql = "SELECT id, name, description, created_at, updated_at FROM faculty ORDER BY name";
-        
+
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -34,15 +34,15 @@ public class FacultyDAO {
      */
     public Faculty getFacultyById(int id) {
         String sql = "SELECT id, name, description, created_at, updated_at FROM faculty WHERE id = ?";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return extractFacultyFromResultSet(rs);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return extractFacultyFromResultSet(rs);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,19 +55,20 @@ public class FacultyDAO {
      */
     public boolean createFaculty(Faculty faculty) {
         String sql = "INSERT INTO faculty (name, description) VALUES (?, ?)";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             stmt.setString(1, faculty.getName());
             stmt.setString(2, faculty.getDescription());
-            
+
             int rowsAffected = stmt.executeUpdate();
             
             if (rowsAffected > 0) {
-                ResultSet rs = stmt.getGeneratedKeys();
-                if (rs.next()) {
-                    faculty.setId(rs.getInt(1));
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        faculty.setId(rs.getInt(1));
+                    }
                 }
                 return true;
             }
@@ -82,14 +83,14 @@ public class FacultyDAO {
      */
     public boolean updateFaculty(Faculty faculty) {
         String sql = "UPDATE faculty SET name = ?, description = ? WHERE id = ?";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, faculty.getName());
             stmt.setString(2, faculty.getDescription());
             stmt.setInt(3, faculty.getId());
-            
+
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +100,6 @@ public class FacultyDAO {
 
     /**
      * Delete faculty (Super Admin only)
-     * Note: This will also delete all related admins and majors due to CASCADE
      */
     public boolean deleteFaculty(int id) {
         String sql = "DELETE FROM faculty WHERE id = ?";
@@ -116,48 +116,6 @@ public class FacultyDAO {
     }
 
     /**
-     * Get faculty statistics
-     */
-    public int getMajorCountByFaculty(int facultyId) {
-        String sql = "SELECT COUNT(*) FROM major WHERE faculty_id = ?";
-        
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, facultyId);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    /**
-     * Get news count by faculty
-     */
-    public int getNewsCountByFaculty(int facultyId) {
-        String sql = "SELECT COUNT(*) FROM news WHERE faculty_id = ?";
-        
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, facultyId);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    /**
      * Extract Faculty object from ResultSet
      */
     private Faculty extractFacultyFromResultSet(ResultSet rs) throws SQLException {
@@ -171,7 +129,8 @@ public class FacultyDAO {
         return faculty;
     }
 
+    // Unused method, can be removed later
     public void addFaculty(Faculty faculty) {
-
+        createFaculty(faculty);
     }
 }

@@ -48,6 +48,45 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     
+    <style>
+        /* Critical CSS - Always load */
+        :root {
+            --dut-blue: #005FB7;
+            --dut-yellow: #FDC32D;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .site-header .top-bar {
+            background: var(--dut-blue) !important;
+        }
+
+        .site-header .navbar {
+            background: var(--dut-blue) !important;
+        }
+
+        .site-header .logo-text {
+            line-height: 1.2;
+        }
+
+        .site-header .logo-text .small {
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+
+        .site-header .logo-text .fw-bold {
+            font-size: 1.1rem;
+        }
+
+        .navbar-brand img {
+            max-height: 60px;
+            width: auto;
+        }
+    </style>
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {

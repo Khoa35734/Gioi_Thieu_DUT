@@ -12,39 +12,101 @@
         </div>
 
         <div class="row g-4">
-            <c:forEach var="news" items="${newsList}" varStatus="loop" begin="0" end="2">
-                <div class="col-lg-4 col-md-6">
-                    <article class="news-card h-100" itemscope itemtype="https://schema.org/NewsArticle">
-                        <div class="news-image">
-                            <img src="${pageContext.request.contextPath}/${news.thumbnail}"
-                                 class="card-img-top"
-                                 alt="${news.title}"
-                                 loading="lazy"
-                                 itemprop="image"
-                                 onerror="this.src='https://via.placeholder.com/400x300/005FB7/ffffff?text=Hinh+Anh'">
-                            <div class="news-badge bg-primary text-white">
-                                <i class="bi bi-calendar3 me-1"></i>${news.createdDate}
+            <c:choose>
+                <c:when test="${not empty newsList}">
+                    <c:forEach var="news" items="${newsList}" varStatus="loop">
+                        <c:if test="${loop.index < 3}">
+                        <div class="col-lg-4 col-md-6">
+                            <article class="news-card h-100" itemscope itemtype="https://schema.org/NewsArticle">
+                        <!-- Show image only if thumbnail exists -->
+                        <c:if test="${not empty news.thumbnail}">
+                            <div class="news-image">
+                                <img src="${pageContext.request.contextPath}/${news.thumbnail}"
+                                     class="card-img-top"
+                                     alt="${news.title}"
+                                     loading="lazy"
+                                     itemprop="image"
+                                     onerror="this.parentElement.style.display='none'">
+                                <div class="news-badge bg-primary text-white">
+                                    <i class="bi bi-calendar3 me-1"></i>${news.createdDate}
+                                </div>
+                                <c:choose>
+                                    <c:when test="${not empty news.facultyName}">
+                                        <div class="news-category bg-warning text-primary">${news.facultyName}</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="news-category bg-info text-white">Tin Trường</div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
-                            <div class="news-category bg-warning text-primary">Sự kiện</div>
-                        </div>
+                        </c:if>
+
                         <div class="card-body d-flex flex-column">
+                            <!-- Faculty badge if no image -->
+                            <c:if test="${empty news.thumbnail}">
+                                <div class="mb-2">
+                                    <c:choose>
+                                        <c:when test="${not empty news.facultyName}">
+                                            <span class="badge bg-warning text-primary">
+                                                <i class="bi bi-building me-1"></i>${news.facultyName}
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge bg-info text-white">
+                                                <i class="bi bi-megaphone me-1"></i>Tin Trường
+                                            </span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <span class="badge bg-light text-dark ms-2">
+                                        <i class="bi bi-calendar3 me-1"></i>${news.createdDate}
+                                    </span>
+                                </div>
+                            </c:if>
+
                             <h3 class="card-title fw-bold mb-3" itemprop="headline">
                                 <a href="${pageContext.request.contextPath}/news-detail?id=${news.id}" class="text-decoration-none text-dark">
                                     ${news.title}
                                 </a>
                             </h3>
+
                             <div class="news-meta mb-3">
                                 <span class="text-muted small">
                                     <i class="bi bi-person-circle me-1"></i>
-                                    <span itemprop="author">Ban Truyền thông</span>
+                                    <span itemprop="author">
+                                        <c:choose>
+                                            <c:when test="${not empty news.authorName}">
+                                                ${news.authorName}
+                                            </c:when>
+                                            <c:otherwise>
+                                                Ban Truyền thông
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </span>
                                 </span>
                                 <span class="text-muted small ms-3">
-                                    <i class="bi bi-eye me-1"></i>1,234 lượt xem
+                                    <i class="bi bi-eye me-1"></i>
+                                    <c:choose>
+                                        <c:when test="${news.views > 0}">
+                                            ${news.views} lượt xem
+                                        </c:when>
+                                        <c:otherwise>
+                                            Mới đăng
+                                        </c:otherwise>
+                                    </c:choose>
                                 </span>
                             </div>
+
                             <p class="card-text text-muted flex-grow-1" itemprop="description">
-                                ${news.content.substring(0, 150)}...
+                                <c:choose>
+                                    <c:when test="${news.content.length() > 150}">
+                                        ${news.content.substring(0, 150)}...
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${news.content}
+                                    </c:otherwise>
+                                </c:choose>
                             </p>
+
                             <a href="${pageContext.request.contextPath}/news-detail?id=${news.id}"
                                class="btn btn-outline-primary mt-auto">
                                 <i class="bi bi-arrow-right-circle me-2"></i>Đọc thêm
@@ -52,9 +114,31 @@
                         </div>
                         <meta itemprop="datePublished" content="${news.createdDate}">
                     </article>
-                </div>
-            </c:forEach>
+                        </div>
+                        </c:if>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Hiện chưa có tin tức nào. Vui lòng quay lại sau.
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
+        
+        <!-- View All News Button -->
+        <c:if test="${not empty newsList}">
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="${pageContext.request.contextPath}/news" class="btn btn-primary btn-lg">
+                        <i class="bi bi-newspaper me-2"></i>Xem tất cả tin tức
+                    </a>
+                </div>
+            </div>
+        </c:if>
 
         <!-- Statistics Section -->
         <div class="row mt-5 pt-5">
@@ -183,10 +267,20 @@
     z-index: 2;
 }
 
+.news-card .card-body {
+    padding: 1.5rem;
+}
+
 .news-card .card-title {
     font-size: 1.2rem;
     line-height: 1.4;
-    min-height: 80px;
+    min-height: 60px;
+}
+
+/* Style for cards without images */
+.news-card .card-body .badge {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
 }
 
 .news-card .card-title a {
