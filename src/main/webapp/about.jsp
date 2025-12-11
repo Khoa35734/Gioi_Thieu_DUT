@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới Thiệu - ĐH Duy Tân</title>
+    <title>Giới Thiệu - ĐH Bách Khoa Đà Nẵng</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="container">
-                <h1>Trường Đại Học Duy Tân</h1>
+                <h1>Trường Đại Học Bách Khoa - Đại học Đà Nẵng</h1>
                 <ul class="menu">
                     <li><a href="home">Trang Chủ</a></li>
                     <li><a href="about.jsp" class="active">Giới Thiệu</a></li>
@@ -26,31 +26,26 @@
 
     <main>
         <div class="container">
-            <h2>Giới Thiệu Về Trường ĐH Duy Tân</h2>
+            <h2>Giới Thiệu Về Trường ĐH Bách Khoa - Đại học Đà Nẵng</h2>
 
             <section class="about-section">
                 <h3>Lịch Sử Hình Thành</h3>
                 <p>
-                    Trường Đại học Duy Tân được thành lập theo Quyết định số 882/GD-ĐT ngày 11/11/1994
-                    của Bộ Giáo dục và Đào tạo. Từ một trường nhỏ với vài chục sinh viên,
-                    đến nay DTU đã phát triển thành một trường đại học lớn với hơn 30.000 sinh viên.
+                   Ngay sau khi đất nước Việt Nam được thống nhất, Ủy ban Nhân dân Cách mạng khu Trung Trung bộ đã có Quyết định số 66/QĐ ngày 15/07/1975 thành lập Viện Đại học Đà Nẵng - là tiền thân của Trường Đại học Bách khoa Đà Nẵng. Tháng 10/1976, Thủ tướng Chính phủ ra Quyết định số 426/TTg thành lập Trường Đại học Bách khoa Đà Nẵng trên cơ sở của Viện Đại học Đà Nẵng. Đến tháng 04 năm 1994, Đại học Đà Nẵng được thành lập theo nghị định số 32/CP của Chính phủ, Trường Đại học Bách khoa Đà Nẵng được đổi tên thành Trường Đại học Kỹ thuật và là một thành viên của Đại học Đà Nẵng. Ngày 09/03/2004 Bộ Giáo dục và Đào tạo ra Quyết định số 1178/QĐ-BGD&ĐT-TCCB, đổi tên Trường Đại học Kỹ thuật thành Trường Đại học Bách khoa - Đại học Đà Nẵng.
                 </p>
             </section>
 
             <section class="about-section">
                 <h3>Sứ Mệnh</h3>
                 <p>
-                    Đào tạo nguồn nhân lực chất lượng cao, có năng lực nghiên cứu khoa học và công nghệ,
-                    đáp ứng nhu cầu phát triển kinh tế - xã hội của đất nước và hội nhập quốc tế.
+                    Là cơ sở giáo dục đại học cung cấp nguồn nhân lực chất lượng cao, có năng lực đổi mới, sáng tạo và khởi nghiệp trong lĩnh vực kỹ thuật – công nghệ; thực hiện nghiên cứu khoa học và chuyển giao công nghệ phục vụ sự phát triển bền vững kinh tế – xã hội của miền Trung – Tây Nguyên, trong nước và quốc tế.
                 </p>
             </section>
 
             <section class="about-section">
                 <h3>Tầm Nhìn</h3>
                 <p>
-                    Trở thành trường đại học nghiên cứu ứng dụng hàng đầu Việt Nam,
-                    có uy tín trong khu vực và thế giới, góp phần thúc đẩy sự phát triển
-                    của khoa học công nghệ và đổi mới sáng tạo.
+                    Đến năm 2035, trường Đại học Bách khoa – Đại học Đà Nẵng là trường đại học nghiên cứu được cộng đồng quốc tế ghi nhận, chủ động hợp tác toàn cầu trong giải quyết các thách thức kinh tế – xã hội trong nước và thế giới.
                 </p>
             </section>
 
@@ -79,7 +74,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Trường Đại Học Duy Tân. All rights reserved.</p>
+            <p>&copy; 2025 Trường Đại Học Bách Khoa - Đại học Đà Nẵng. All rights reserved.</p>
         </div>
     </footer>
 </body>

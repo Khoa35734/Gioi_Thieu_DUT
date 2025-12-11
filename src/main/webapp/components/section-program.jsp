@@ -15,7 +15,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="program-card h-100">
                     <div class="program-image">
-                        <img src="${pageContext.request.contextPath}/assets/img/program-it.jpg" 
+                        <img src="${pageContext.request.contextPath}/assets/img/program-it.jpg"
                              class="card-img-top" 
                              alt="Công nghệ thông tin"
                              loading="lazy"
@@ -258,6 +258,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
 }
 

@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ngành Học - ĐH Duy Tân</title>
+    <title>Ngành Học - ĐH Bách Khoa Đà Nẵng</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="container">
-                <h1>Trường Đại Học Duy Tân</h1>
+                <h1>Trường Đại Học Bách Khoa - Đại học Đà Nẵng</h1>
                 <ul class="menu">
                     <li><a href="home">Trang Chủ</a></li>
                     <li><a href="about.jsp">Giới Thiệu</a></li>
@@ -44,7 +44,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Trường Đại Học Duy Tân. All rights reserved.</p>
+            <p>&copy; 2025 Trường Đại Học Bách Khoa - Đại học Đà Nẵng. All rights reserved.</p>
         </div>
     </footer>
 </body>
