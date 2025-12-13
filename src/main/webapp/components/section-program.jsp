@@ -97,15 +97,16 @@
                 </div>
             </div>
 
-            <!-- Program 3: Electrical & Electronics -->
+            <!-- language: html -->
+            <!-- Program 3: Electrical / Electronics Engineering -->
             <div class="col-lg-3 col-md-6">
                 <div class="program-card h-100">
                     <div class="program-image">
-                        <img src="${pageContext.request.contextPath}/assets/img/program-electrical.jpg" 
-                             class="card-img-top" 
+                        <img src="${pageContext.request.contextPath}/assets/img/program-electrical.jpg"
+                             class="card-img-top"
                              alt="Điện - Điện tử"
                              loading="lazy"
-                             onerror="this.src='https://via.placeholder.com/400x300/005FB7/ffffff?text=Dien+-+Dien+tu'">
+                             onerror="this.src='https://via.placeholder.com/400x300/005FB7/ffffff?text=Dien+%2F+DT'">
                         <div class="program-overlay">
                             <i class="bi bi-lightning-charge-fill display-1"></i>
                         </div>
@@ -116,21 +117,20 @@
                         </div>
                         <h4 class="card-title fw-bold text-primary mb-3">Điện - Điện tử</h4>
                         <p class="card-text text-muted flex-grow-1">
-                            Đào tạo kỹ sư điện và điện tử có kiến thức về hệ thống điện, điều khiển tự động, 
-                            năng lượng tái tạo và IoT.
+                            Đào tạo kỹ sư Điện, Điện tử có năng lực thiết kế hệ thống điện, điều khiển, nhúng và truyền động.
                         </p>
                         <ul class="program-highlights mb-3">
                             <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Hệ thống điện</li>
+                            <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Điều khiển và tự động hóa</li>
                             <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Điện tử công suất</li>
-                            <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Năng lượng tái tạo</li>
-                            <li><i class="bi bi-check-circle-fill text-warning me-2"></i>IoT & Smart Grid</li>
+                            <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Hệ nhúng</li>
                         </ul>
                         <div class="program-meta mb-3">
                             <span class="badge bg-primary me-2">
                                 <i class="bi bi-clock me-1"></i>4 năm
                             </span>
                             <span class="badge bg-warning text-dark">
-                                <i class="bi bi-award me-1"></i>Chuẩn quốc tế
+                                <i class="bi bi-award me-1"></i>Chuẩn AUN-QA
                             </span>
                         </div>
                         <a href="#" class="btn btn-primary w-100 mt-auto">
@@ -241,8 +241,35 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: none;
+    display: flex;/* center cards and control spacing */
+    .programs-section .row.g-4 {
+        justify-content: center; /* center the group of columns */
+        gap: 1.5rem;             /* consistent gap between cards (works with modern browsers) */
+        flex-wrap: wrap;
+    }
+
+    /* make bootstrap columns stretch so cards have equal height and spacing */
+    .programs-section .col-lg-3,
+    .programs-section .col-md-6 {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    /* keep cards full-width of their column and limit max width for nicer centering */
+    .program-card {
+        width: 100%;
+        max-width: 320px; /* adjust as needed to control card size */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
+.program-card .card-body {
+    flex: 1 1 auto;
+    flex-direction: column;
+}
 .program-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 24px rgba(0,95,183,0.2);
@@ -269,7 +296,185 @@
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
+    right: 0;/* css */
+    .programs-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .programs-section .section-title {
+        font-size: 2.5rem;
+        color: #005FB7;
+    }
+
+    .programs-section .title-divider {
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #005FB7 0%, #FDC32D 100%);
+        margin-top: 1rem;
+    }
+
+    /* center cards and control spacing */
+    .programs-section .row.g-4 {
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* make bootstrap columns stretch so cards have equal height and spacing */
+    .programs-section .col-lg-3,
+    .programs-section .col-md-6 {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    /* card layout: column flex so mt-auto on button pushes it to bottom */
+    .program-card {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    /* let card body grow and be a column so button with mt-auto sits at bottom */
+    .program-card .card-body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* small visual tweaks */
+    .program-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0,95,183,0.2);
+    }
+
+    .program-image {
+        position: relative;
+        overflow: hidden;
+        height: 220px;
+    }
+
+    .program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .program-card:hover .program-image img {
+        transform: scale(1.1);
+    }
+
+    .program-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0,95,183,0.9) 0%, rgba(0,61,130,0.9) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .program-card:hover .program-overlay {
+        opacity: 1;
+    }
+
+    .program-overlay i {
+        color: #FDC32D;
+    }
+
+    .program-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #005FB7 0%, #003d82 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .program-icon i {
+        font-size: 1.8rem;
+        color: #FDC32D;
+    }
+
+    .program-card .card-title {
+        font-size: 1.3rem;
+    }
+
+    .program-highlights {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .program-highlights li {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: #6c757d;
+    }
+
+    .program-meta .badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+        font-weight: 500;
+    }
+
+    .program-card .btn-primary {
+        background-color: #005FB7;
+        border-color: #005FB7;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .program-card .btn-primary:hover {
+        background-color: #FDC32D;
+        border-color: #FDC32D;
+        color: #005FB7;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(253,195,45,0.4);
+    }
+
+    .programs-section .btn-warning {
+        background-color: #FDC32D;
+        border-color: #FDC32D;
+        color: #005FB7;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .programs-section .btn-warning:hover {
+        background-color: #005FB7;
+        border-color: #005FB7;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0,95,183,0.3);
+    }
+
+    @media (max-width: 991px) {
+        .program-card {
+            margin-bottom: 1.5rem;
+            max-width: none;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .programs-section .section-title {
+            font-size: 2rem;
+        }
+    }
     bottom: 0;
     background: linear-gradient(135deg, rgba(0,95,183,0.9) 0%, rgba(0,61,130,0.9) 100%);
     display: flex;

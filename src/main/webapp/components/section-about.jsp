@@ -86,94 +86,214 @@
                         </div>
                     </div>
 
-                    <!-- Mission Tab -->
-                    <div class="tab-pane fade" id="mission" role="tabpanel">
-                        <div class="row align-items-center">
-                            <div class="col-md-7 mb-3">
-                                <h3 class="mb-3 text-primary fw-bold">Sứ mệnh</h3>
-                                <p class="text-justify">
-                                    Đào tạo nguồn nhân lực kỹ thuật công nghệ chất lượng cao, có phẩm chất đạo đức, 
-                                    trách nhiệm xã hội, năng lực chuyên môn vững vàng và kỹ năng thực hành tốt, 
-                                    đáp ứng nhu cầu phát triển của xã hội.
-                                </p>
-                                <p class="text-justify">
-                                    Thực hiện nghiên cứu khoa học và chuyển giao công nghệ, tạo ra những giá trị khoa học 
-                                    và công nghệ phục vụ cộng đồng và đóng góp vào sự phát triển bền vững của đất nước.
-                                </p>
-                                <div class="alert alert-info" role="alert">
-                                    <i class="bi bi-lightbulb me-2"></i>
-                                    <strong>Cam kết:</strong> Mỗi sinh viên tốt nghiệp từ Trường Đại học Bách Khoa 
-                                    đều được trang bị đầy đủ kiến thức, kỹ năng và phẩm chất cần thiết để thành công 
-                                    trong sự nghiệp và cuộc sống.
+                    <!-- History Tab -->
+                    <div class="tab-pane fade" id="history" role="tabpanel">
+                        <h3 class="text-center fw-bold text-primary mb-5">
+                            Lịch sử hình thành và phát triển (1975 – 2025)
+                        </h3>
+
+                        <div class="vertical-timeline">
+
+                            <!-- 1975 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>1975</h4>
+                                    <p>
+                                        Thành lập Viện Đại học Đà Nẵng, gồm các khoa:
+                                        Cơ khí, Điện, Kinh tế, Khoa học cơ bản.
+                                    </p>
                                 </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
                             </div>
-                            <div class="col-md-5 mb-3">
-                                <img src="${pageContext.request.contextPath}/assets/img/about-mission.jpg" 
-                                     class="img-fluid rounded shadow" 
-                                     alt="Sứ mệnh"
-                                     loading="lazy"
-                                     onerror="this.src='https://via.placeholder.com/500x400/005FB7/ffffff?text=Su+menh'">
+
+                            <!-- 1976 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>1976</h4>
+                                    <p>Thành lập Khoa Xây dựng.</p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
                             </div>
+
+                            <!-- 1978 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>1978</h4>
+                                    <p>
+                                        Thành lập Khoa Điện – hoàn thiện mô hình
+                                        Trường Đại học Kỹ thuật trọng điểm.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 1987 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>1987</h4>
+                                    <p>Thành lập Khoa Công nghệ Nhiệt – Điện lạnh.</p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 1994 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>1994</h4>
+                                    <p>Thành lập Đại học Đà Nẵng.</p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 1996 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>1996</h4>
+                                    <p>
+                                        Thành lập Khoa Công nghệ Thông tin và
+                                        Khoa Xây dựng Cầu đường.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2004 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>2004</h4>
+                                    <p>
+                                        Quyết định đổi tên thành
+                                        Trường Đại học Bách Khoa – Đại học Đà Nẵng.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2005 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>2005</h4>
+                                    <p>
+                                        Thành lập Khoa Cơ khí Giao thông và
+                                        Khoa Điện tử – Viễn thông.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2007 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>2007</h4>
+                                    <p>
+                                        Thành lập Khoa Quản lý Dự án và
+                                        Khoa Môi trường.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2010 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>2010</h4>
+                                    <p>
+                                        Chuyển mình phát triển thành
+                                        Trường Đại học định hướng nghiên cứu.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2012 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>2012</h4>
+                                    <p>Thành lập Khoa Kiến trúc.</p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2017 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>2017</h4>
+                                    <p>
+                                        Đạt chứng nhận cơ sở giáo dục đại học
+                                        theo tiêu chuẩn HCERES.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2018 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>2018</h4>
+                                    <p>
+                                        Thành lập Khoa Khoa học Công nghệ Tiên tiến.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2020 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>2020</h4>
+                                    <p>
+                                        Đạt danh hiệu Anh hùng Lao động
+                                        thời kỳ đổi mới.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2022 -->
+                            <div class="timeline-item left">
+                                <div class="timeline-content">
+                                    <h4>2022</h4>
+                                    <p>
+                                        Được trao tặng Huân chương Độc lập hạng Nhì.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
+                            <!-- 2025 -->
+                            <div class="timeline-item right">
+                                <div class="timeline-content">
+                                    <h4>2025</h4>
+                                    <p>
+                                        Hình thành hệ sinh thái giáo dục nhân văn –
+                                        đổi mới – sáng tạo, kỷ niệm 50 năm phát triển.
+                                    </p>
+                                </div>
+                                <span class="timeline-dot"></span>
+                                <span class="timeline-line"></span>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- History Tab -->
-                    <div class="tab-pane fade" id="history" role="tabpanel">
-                        <div class="row align-items-center">
-                            <div class="col-md-7 mb-3">
-                                <h3 class="mb-3 text-primary fw-bold">Lịch sử hình thành và phát triển</h3>
-                                <div class="timeline">
-                                    <div class="timeline-item mb-4">
-                                        <div class="timeline-badge bg-warning">1975</div>
-                                        <div class="timeline-content">
-                                            <h5>Thành lập Trường</h5>
-                                            <p>Trường Đại học Bách Khoa Đà Nẵng được thành lập, tiền thân là 
-                                            Phân hiệu Đại học Bách Khoa Sài Gòn tại Đà Nẵng.</p>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item mb-4">
-                                        <div class="timeline-badge bg-warning">1994</div>
-                                        <div class="timeline-content">
-                                            <h5>Sáp nhập vào ĐHĐN</h5>
-                                            <p>Trường chính thức trở thành thành viên của Đại học Đà Nẵng, 
-                                            mở rộng quy mô đào tạo và nghiên cứu.</p>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item mb-4">
-                                        <div class="timeline-badge bg-warning">2005</div>
-                                        <div class="timeline-content">
-                                            <h5>Đạt chuẩn chất lượng</h5>
-                                            <p>Trường đạt kiểm định chất lượng giáo dục theo tiêu chuẩn quốc gia, 
-                                            khẳng định vị thế hàng đầu trong đào tạo kỹ thuật.</p>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item mb-4">
-                                        <div class="timeline-badge bg-warning">2015</div>
-                                        <div class="timeline-content">
-                                            <h5>Công nhận chuẩn quốc tế</h5>
-                                            <p>Nhiều chương trình đào tạo được công nhận đạt chuẩn AUN-QA, 
-                                            mở ra cơ hội hợp tác quốc tế rộng lớn.</p>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-badge bg-warning">2025</div>
-                                        <div class="timeline-content">
-                                            <h5>Phát triển toàn diện</h5>
-                                            <p>Trường tiếp tục phát triển mạnh mẽ với cơ sở vật chất hiện đại, 
-                                            đội ngũ giảng viên chất lượng cao và hợp tác quốc tế sâu rộng.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5 mb-3">
-                                <img src="${pageContext.request.contextPath}/assets/img/about-history.jpg" 
-                                     class="img-fluid rounded shadow mb-3" 
-                                     alt="Lịch sử"
-                                     loading="lazy"
-                                     onerror="this.src='https://via.placeholder.com/500x400/005FB7/ffffff?text=Lich+su'">
-                            </div>
-                        </div>
-                    </div>
+
+
+
 
                     <!-- Values Tab -->
                     <div class="tab-pane fade" id="values" role="tabpanel">
@@ -321,124 +441,143 @@
 </section>
 
 <style>
-.about-section {
-    background-color: #f8f9fa;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    color: #005FB7;
-}
-
-.title-divider {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #005FB7 0%, #FDC32D 100%);
-    margin-top: 1rem;
-}
-
-.about-sidebar .list-group-item {
-    border: none;
-    border-left: 3px solid transparent;
-    background-color: #ffffff;
-    margin-bottom: 0.5rem;
-    border-radius: 0.25rem;
-    transition: all 0.3s ease;
-}
-
-.about-sidebar .list-group-item:hover {
-    border-left-color: #FDC32D;
-    background-color: #f0f8ff;
-    padding-left: 1.5rem;
-}
-
-.about-sidebar .list-group-item.active {
-    background-color: #005FB7;
-    color: white;
-    border-left-color: #FDC32D;
-    font-weight: 600;
-}
-
-.about-content {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    min-height: 500px;
-}
-
-.timeline {
-    position: relative;
-    padding-left: 50px;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: #FDC32D;
-}
-
-.timeline-item {
-    position: relative;
-}
-
-.timeline-badge {
-    position: absolute;
-    left: -38px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #005FB7;
-    font-size: 0.9rem;
-    border: 3px solid #005FB7;
-}
-
-.timeline-content {
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: 0.5rem;
-    border-left: 3px solid #005FB7;
-}
-
-.value-card {
-    transition: all 0.3s ease;
-}
-
-.value-card:hover {
-    transform: translateX(10px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.stat-box {
-    transition: all 0.3s ease;
-}
-
-.stat-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.cooperation-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-@media (max-width: 991px) {
-    .about-sidebar {
-        position: relative !important;
-        top: 0 !important;
+    /* ================= VERTICAL TIMELINE ================= */
+    .vertical-timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: auto;
     }
-    
-    .about-content {
-        margin-top: 1rem;
+
+    .vertical-timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: #FDC32D;
+        transform: translateX(-50%);
     }
-}
+
+    /* ========== ITEM ========== */
+    .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 30px 40px; /* Padding này tạo ra khoảng cách 40px giữa content và đường kẻ chính */
+    }
+
+    .timeline-item.left {
+        left: 0;
+        text-align: right;
+    }
+
+    .timeline-item.right {
+        left: 50%;
+        text-align: left;
+    }
+
+    /* ========== DOT & LINE (GOM CHUNG CĂN GIỮA) - ĐÃ SỬA ========== */
+    .timeline-dot,
+    .timeline-line {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* dot */
+    .timeline-dot {
+        width: 14px;
+        height: 14px;
+        background: #005FB7;
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    /* line */
+    .timeline-line {
+        height: 2px;
+        background: #005FB7;
+    }
+
+
+    .timeline-item.left .timeline-dot {
+        right: -7px;
+    }
+
+    .timeline-item.right .timeline-dot {
+        left: -7px;
+    }
+
+
+    .timeline-item.left .timeline-line {
+        right: 0;
+        width: 40px;
+    }
+
+    .timeline-item.right .timeline-line {
+        left: 0;
+        width: 40px;
+    }
+
+    /* ========== CONTENT ========== */
+    .timeline-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    }
+
+    .timeline-item.left .timeline-content {
+        border-right: 4px solid #005FB7;
+    }
+
+    .timeline-item.right .timeline-content {
+        border-left: 4px solid #005FB7;
+    }
+
+    .timeline-content h4 {
+        font-weight: 700;
+        color: #005FB7;
+        margin-bottom: 10px;
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 768px) {
+        .vertical-timeline::before {
+            left: 20px;
+        }
+
+        .timeline-item {
+            width: 100%;
+            left: 0 !important;
+            padding-left: 60px; /* Tăng padding để tạo khoảng trống cho dot/line */
+            text-align: left !important;
+        }
+
+        .timeline-dot {
+            left: 13px; /* Căn chỉnh chấm tròn so với đường dọc mới (20px) */
+            right: auto;
+        }
+
+        /* Sửa line cho mobile */
+        .timeline-line {
+            left: 20px; /* Bắt đầu từ đường dọc chính */
+            width: 30px; /* Chiều dài nối ra content */
+        }
+
+        /* Đảm bảo line và dot không bị dịch chuyển theo side */
+        .timeline-item.left .timeline-line {
+            right: auto;
+        }
+
+        .timeline-item.right .timeline-line {
+            right: auto;
+        }
+
+
+        .timeline-content {
+            border-left: 4px solid #005FB7;
+            border-right: none;
+        }
+    }
 </style>
