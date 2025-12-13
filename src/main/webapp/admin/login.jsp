@@ -1,90 +1,83 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f7f6;
-            margin: 0;
-        }
         .login-container {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%;
             max-width: 400px;
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #333;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
         .form-group input {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            box-sizing: border-box;
         }
-        .form-group button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #007bff;
-            color: white;
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+        button.btn-primary {
+            padding: 10px 20px;
+            background-color: #4CAF50;
             border: none;
+            color: white;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
         }
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-        .error {
-            color: #d9534f;
-            background-color: #f2dede;
-            border: 1px solid #ebccd1;
-            padding: 10px;
-            border-radius: 4px;
-            text-align: center;
-            margin-top: 1rem;
+        button.btn-primary:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Admin Login</h2>
-        <form action="${pageContext.request.contextPath}/admin/login" method="post">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required value="${param.username}">
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Login</button>
-            </div>
-            <c:if test="${not empty error}">
-                <p class="error">${error}</p>
-            </c:if>
-        </form>
-    </div>
+
+<div class="login-container">
+    <h2>Đăng Nhập Admin</h2>
+
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="error-message">${error}</div>
+    <% } %>
+
+    <form method="post" action="login">
+        <div class="form-group">
+            <label for="username">Tên đăng nhập:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+    </form>
+
+    <p style="margin-top: 20px;">
+        Demo: username = <strong>admin</strong>, password = <strong>admin123</strong>
+    </p>
+
+    <p>
+        <a href="${pageContext.request.contextPath}/home">← Quay về trang chủ</a>
+    </p>
+</div>
+
 </body>
 </html>
