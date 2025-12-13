@@ -1,7 +1,7 @@
 package controller;
 
-import dao.NewsDAO;
-import dao.MajorDAO;
+import bo.NewsBO;
+import bo.MajorBO;
 import model.Admin;
 import model.News;
 import model.Major;
@@ -14,13 +14,13 @@ import java.util.List;
 
 @WebServlet("/admin/faculty/dashboard")
 public class FacultyDashboardServlet extends HttpServlet {
-    private NewsDAO newsDAO;
-    private MajorDAO majorDAO;
+    private NewsBO newsBO;
+    private MajorBO majorBO;
 
     @Override
     public void init() {
-        newsDAO = new NewsDAO();
-        majorDAO = new MajorDAO();
+        newsBO = new NewsBO();
+        majorBO = new MajorBO();
     }
 
     @Override
@@ -49,14 +49,16 @@ public class FacultyDashboardServlet extends HttpServlet {
             return;
         }
 
-        // Get faculty statistics
-        List<News> facultyNews = newsDAO.getNewsByFaculty(facultyId);
-        List<Major> facultyMajors = majorDAO.getMajorsByFaculty(facultyId);
+        // Get faculty statistics using BO
+        int totalNews = newsBO.getTotalNewsCount(admin);
+        int totalMajors = majorBO.getTotalMajorsCount(admin);
+        List<News> recentNews = newsBO.getRecentNews(admin, 5);
+        List<Major> facultyMajors = majorBO.getMajorsForAdmin(admin);
         
-        request.setAttribute("totalNews", facultyNews.size());
-        request.setAttribute("totalMajors", facultyMajors.size());
+        request.setAttribute("totalNews", totalNews);
+        request.setAttribute("totalMajors", totalMajors);
         request.setAttribute("newNewsThisMonth", 5); // TODO: Calculate from DB
-        request.setAttribute("activeMajors", facultyMajors.size());
+        request.setAttribute("activeMajors", totalMajors);
         request.setAttribute("monthlyViews", 1250); // TODO: Calculate from DB
         request.setAttribute("viewsGrowth", 15); // TODO: Calculate from DB
         request.setAttribute("pendingNews", 3); // TODO: Calculate from DB
@@ -65,13 +67,8 @@ public class FacultyDashboardServlet extends HttpServlet {
         // Faculty majors list for table
         request.setAttribute("facultyMajors", facultyMajors);
         
-        // Recent news (limit to 5)
-        int newsCount = Math.min(5, facultyNews.size());
-        if (newsCount > 0) {
-            request.setAttribute("recentNews", facultyNews.subList(0, newsCount));
-        } else {
-            request.setAttribute("recentNews", facultyNews);
-        }
+        // Recent news
+        request.setAttribute("recentNews", recentNews);
 
         request.getRequestDispatcher("/admin/faculty/faculty-dashboard.jsp").forward(request, response);
     }

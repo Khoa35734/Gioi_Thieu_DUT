@@ -1,6 +1,6 @@
 package controller;
 
-import dao.MajorDAO;
+import bo.MajorBO;
 import model.Admin;
 import model.Major;
 
@@ -12,11 +12,11 @@ import java.util.List;
 
 @WebServlet("/admin/faculty/majors")
 public class FacultyMajorServlet extends HttpServlet {
-    private MajorDAO majorDAO;
+    private MajorBO majorBO;
 
     @Override
     public void init() {
-        majorDAO = new MajorDAO();
+        majorBO = new MajorBO();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class FacultyMajorServlet extends HttpServlet {
 
     private void listMajors(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
-        List<Major> majorList = majorDAO.getMajorsByFaculty(admin.getFacultyId());
+        List<Major> majorList = majorBO.getMajorsByFaculty(admin.getFacultyId());
         request.setAttribute("majorList", majorList);
         request.setAttribute("admin", admin);
         request.getRequestDispatcher("/admin/faculty/faculty-major-list.jsp").forward(request, response);
@@ -102,7 +102,7 @@ public class FacultyMajorServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Major major = majorDAO.getMajorById(id);
+        Major major = majorBO.getMajorById(id);
 
         // Check if major belongs to admin's faculty
         if (major == null || major.getFacultyId() != admin.getFacultyId()) {
@@ -121,9 +121,8 @@ public class FacultyMajorServlet extends HttpServlet {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
 
-        // Check if major code already exists
-        Major existingMajor = majorDAO.getMajorByCode(majorCode);
-        if (existingMajor != null) {
+        // Check if major code already exists using BO
+        if (majorBO.majorCodeExists(majorCode)) {
             request.setAttribute("error", "Mã ngành đã tồn tại!");
             request.setAttribute("admin", admin);
             request.getRequestDispatcher("/admin/faculty/faculty-major-form.jsp").forward(request, response);
@@ -134,10 +133,10 @@ public class FacultyMajorServlet extends HttpServlet {
         major.setMajorCode(majorCode);
         major.setName(name);
         major.setDescription(description);
-        major.setFacultyId(admin.getFacultyId());
         major.setCreatedBy(admin.getId());
 
-        if (majorDAO.createMajor(major)) {
+        // Business logic handled in BO (including facultyId)
+        if (majorBO.createMajor(major, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?success=created");
         } else {
             request.setAttribute("error", "Không thể tạo ngành học!");
@@ -149,9 +148,9 @@ public class FacultyMajorServlet extends HttpServlet {
     private void updateMajor(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Major existingMajor = majorDAO.getMajorById(id);
+        Major existingMajor = majorBO.getMajorById(id);
 
-        // Check if major belongs to admin's faculty
+        // Check if major belongs to admin's faculty (BO also validates)
         if (existingMajor == null || existingMajor.getFacultyId() != admin.getFacultyId()) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?error=unauthorized");
             return;
@@ -161,24 +160,14 @@ public class FacultyMajorServlet extends HttpServlet {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
 
-        // Check if major code already exists (excluding current major)
-        Major codeCheck = majorDAO.getMajorByCode(majorCode);
-        if (codeCheck != null && codeCheck.getId() != id) {
-            request.setAttribute("error", "Mã ngành đã tồn tại!");
-            request.setAttribute("major", existingMajor);
-            request.setAttribute("admin", admin);
-            request.getRequestDispatcher("/admin/faculty/faculty-major-form.jsp").forward(request, response);
-            return;
-        }
-
         Major major = new Major();
         major.setId(id);
         major.setMajorCode(majorCode);
         major.setName(name);
         major.setDescription(description);
-        major.setFacultyId(admin.getFacultyId());
 
-        if (majorDAO.updateMajor(major)) {
+        // Business logic handled in BO (including validation and duplicate check)
+        if (majorBO.updateMajor(major, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?success=updated");
         } else {
             request.setAttribute("error", "Không thể cập nhật ngành học!");
@@ -191,15 +180,9 @@ public class FacultyMajorServlet extends HttpServlet {
     private void deleteMajor(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Major major = majorDAO.getMajorById(id);
-
-        // Check if major belongs to admin's faculty
-        if (major == null || major.getFacultyId() != admin.getFacultyId()) {
-            response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?error=unauthorized");
-            return;
-        }
-
-        if (majorDAO.deleteMajor(id)) {
+        
+        // Business logic and validation handled in BO
+        if (majorBO.deleteMajor(id, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?success=deleted");
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/majors?error=delete_failed");
