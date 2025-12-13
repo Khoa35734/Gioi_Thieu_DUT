@@ -12,7 +12,7 @@
     <header>
         <nav>
             <div class="container">
-                <h1>Trường Đại Học Bách Khoa - ĐH Đà Nẵng/h1>
+                <h1>Trường Đại Học Bách Khoa - ĐH Đà Nẵng </h1>
                 <ul class="menu">
                     <li><a href="${pageContext.request.contextPath}/home">Trang Chủ</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp">Giới Thiệu</a></li>
