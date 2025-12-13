@@ -1,7 +1,7 @@
 package controller;
 
-import dao.FacultyDAO;
-import dao.NewsDAO;
+import bo.FacultyBO;
+import bo.NewsBO;
 import model.Faculty;
 import model.News;
 
@@ -17,15 +17,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/") // Map to the root context
 public class HomeServlet extends HttpServlet {
 
-    private NewsDAO newsDAO = new NewsDAO();
-    private FacultyDAO facultyDAO = new FacultyDAO(); // Initialize FacultyDAO
+    private NewsBO newsBO = new NewsBO();
+    private FacultyBO facultyBO = new FacultyBO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Get random news from all faculties for featured section (limit 3)
-        List<News> newsList = newsDAO.getRandomNews(3);
+        List<News> newsList = newsBO.getRandomNewsForHomepage(3);
         
         // Debug logging
         System.out.println("=== HomeServlet Debug ===");
@@ -40,7 +40,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("newsList", newsList);
         
         // Get all faculties and set as attribute
-        List<Faculty> faculties = facultyDAO.getAllFaculties();
+        List<Faculty> faculties = facultyBO.getAllFaculties();
         request.setAttribute("faculties", faculties);
         
         // Forward to the main index page

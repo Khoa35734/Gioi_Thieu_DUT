@@ -1,6 +1,6 @@
 package controller;
 
-import dao.NewsDAO;
+import bo.NewsBO;
 import model.Admin;
 import model.News;
 
@@ -21,12 +21,12 @@ import java.util.UUID;
     maxRequestSize = 1024 * 1024 * 50      // 50 MB
 )
 public class FacultyNewsServlet extends HttpServlet {
-    private NewsDAO newsDAO;
+    private NewsBO newsBO;
     private static final String UPLOAD_DIR = "uploads/news-content";
 
     @Override
     public void init() {
-        newsDAO = new NewsDAO();
+        newsBO = new NewsBO();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class FacultyNewsServlet extends HttpServlet {
 
     private void listNews(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
-        List<News> newsList = newsDAO.getNewsByFaculty(admin.getFacultyId());
+        List<News> newsList = newsBO.getNewsByFaculty(admin.getFacultyId());
         request.setAttribute("newsList", newsList);
         request.setAttribute("admin", admin);
         request.getRequestDispatcher("/admin/faculty/faculty-news-list.jsp").forward(request, response);
@@ -112,7 +112,7 @@ public class FacultyNewsServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        News news = newsDAO.getNewsById(id);
+        News news = newsBO.getNewsById(id);
 
         // Check if news belongs to admin's faculty
         if (news == null || (news.getFacultyId() != null && !news.getFacultyId().equals(admin.getFacultyId()))) {
@@ -138,8 +138,6 @@ public class FacultyNewsServlet extends HttpServlet {
         news.setTitle(title);
         news.setContent(content);
         news.setThumbnail(thumbnail);
-        news.setFacultyId(admin.getFacultyId());
-        news.setAuthorId(admin.getId());
         news.setViews(0);
 
         if (dateStr != null && !dateStr.isEmpty()) {
@@ -148,7 +146,8 @@ public class FacultyNewsServlet extends HttpServlet {
             news.setCreatedDate(new Date(System.currentTimeMillis()));
         }
 
-        if (newsDAO.createNews(news)) {
+        // Business logic handled in BO (including facultyId and authorId)
+        if (newsBO.createNews(news, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/news?success=created");
         } else {
             request.setAttribute("error", "Không thể tạo bài viết!");
@@ -160,9 +159,9 @@ public class FacultyNewsServlet extends HttpServlet {
     private void updateNews(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        News existingNews = newsDAO.getNewsById(id);
+        News existingNews = newsBO.getNewsById(id);
 
-        // Check if news belongs to admin's faculty
+        // Check if news belongs to admin's faculty (business logic will also validate)
         if (existingNews == null || (existingNews.getFacultyId() != null && !existingNews.getFacultyId().equals(admin.getFacultyId()))) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/news?error=unauthorized");
             return;
@@ -183,7 +182,6 @@ public class FacultyNewsServlet extends HttpServlet {
         news.setTitle(title);
         news.setContent(content);
         news.setThumbnail(thumbnail);
-        news.setFacultyId(admin.getFacultyId());
         news.setViews(existingNews.getViews());
 
         if (dateStr != null && !dateStr.isEmpty()) {
@@ -192,7 +190,8 @@ public class FacultyNewsServlet extends HttpServlet {
             news.setCreatedDate(existingNews.getCreatedDate());
         }
 
-        if (newsDAO.updateNews(news)) {
+        // Business logic handled in BO
+        if (newsBO.updateNews(news, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/news?success=updated");
         } else {
             request.setAttribute("error", "Không thể cập nhật bài viết!");
@@ -205,15 +204,9 @@ public class FacultyNewsServlet extends HttpServlet {
     private void deleteNews(HttpServletRequest request, HttpServletResponse response, Admin admin)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        News news = newsDAO.getNewsById(id);
-
-        // Check if news belongs to admin's faculty
-        if (news == null || (news.getFacultyId() != null && !news.getFacultyId().equals(admin.getFacultyId()))) {
-            response.sendRedirect(request.getContextPath() + "/admin/faculty/news?error=unauthorized");
-            return;
-        }
-
-        if (newsDAO.deleteNews(id)) {
+        
+        // Business logic and validation handled in BO
+        if (newsBO.deleteNews(id, admin)) {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/news?success=deleted");
         } else {
             response.sendRedirect(request.getContextPath() + "/admin/faculty/news?error=delete_failed");
