@@ -86,6 +86,28 @@
                         </div>
                     </div>
 
+                    <!-- Mission Tab -->
+                    <div class="tab-pane fade" id="mission" role="tabpanel">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 mb-3">
+                                <h3 class="mb-3 text-primary fw-bold">Sứ mệnh</h3>
+                                <p class="text-justify">
+                                    Là cơ sở giáo dục đại học cung cấp nguồn nhân lực chất lượng cao, có năng lực đổi mới,
+                                    sáng tạo và khởi nghiệp trong lĩnh vực kỹ thuật – công nghệ; thực hiện nghiên cứu khoa học
+                                    và chuyển giao công nghệ phục vụ sự phát triển bền vững kinh tế – xã hội của miền Trung – Tây Nguyên,
+                                    trong nước và quốc tế.
+                                </p>
+                            </div>
+                            <div class="col-md-5 mb-3">
+                                <img src="${pageContext.request.contextPath}/assets/img/about-mission.jpg"
+                                     class="img-fluid rounded shadow"
+                                     alt="Sứ mệnh"
+                                     loading="lazy"
+                                     onerror="this.src='https://via.placeholder.com/500x400/005FB7/ffffff?text=Su+menh'">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- History Tab -->
                     <div class="tab-pane fade" id="history" role="tabpanel">
                         <h3 class="text-center fw-bold text-primary mb-5">

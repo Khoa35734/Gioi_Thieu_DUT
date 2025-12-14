@@ -177,6 +177,16 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
         border: none;
+        display: flex;               /* ensure card is a flex column so body can stretch */
+        flex-direction: column;      /* make children stack vertically */
+    }
+
+    /* Make the card body fill available space so the read-more button can stick to the bottom */
+    .news-card .card-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto; /* grow to fill the card */
+        padding: 1rem 1rem; /* preserve default spacing */
     }
 
     .news-card:hover {
