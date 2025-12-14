@@ -1,4 +1,4 @@
-# Website Giới Thiệu Trường ĐH Duy Tân (DTU)
+# Website Giới Thiệu Trường ĐH Bách Khoa
 
 ## Mô Tả Project
 Website giới thiệu trường học sử dụng mô hình MVC với JSP/Servlet. Project mang tính chất DEMO với dữ liệu mock.
