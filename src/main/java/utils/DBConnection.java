@@ -9,7 +9,7 @@ public class DBConnection {
     // Thông tin kết nối database (DEMO)
     private static final String URL = "jdbc:mysql://localhost:3306/gioi_thieu_dut";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "khoakhoa04";
 
     // Lấy kết nối database
     public static Connection getConnection() throws SQLException {

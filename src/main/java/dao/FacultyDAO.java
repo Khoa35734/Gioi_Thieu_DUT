@@ -1,56 +1,177 @@
 package dao;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import model.Faculty;
+import utils.DBConnection;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FacultyDAO {
 
-    // Mock data – dữ liệu demo thay vì kết nối DB
-    private static List<Faculty> mockData = new ArrayList<>();
-    private static int nextId = 4;
-
-    // Khởi tạo dữ liệu demo
-    static {
-        mockData.add(new Faculty(1, "Khoa Công Nghệ Thông Tin", "Đào tạo chuyên ngành CNTT, phần mềm, mạng máy tính"));
-        mockData.add(new Faculty(2, "Khoa Cơ Khí", "Đào tạo kỹ sư cơ khí, chế tạo máy, ô tô"));
-        mockData.add(new Faculty(3, "Khoa Điện - Điện Tử", "Đào tạo kỹ sư điện, tự động hóa, điện tử viễn thông"));
-    }
-
-    // Lấy toàn bộ khoa
+    /**
+     * Get all faculties
+     */
     public List<Faculty> getAllFaculties() {
-        return new ArrayList<>(mockData);
+        List<Faculty> faculties = new ArrayList<>();
+        String sql = "SELECT id, name, description, created_at, updated_at FROM faculty ORDER BY name";
+        
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            
+            while (rs.next()) {
+                faculties.add(extractFacultyFromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return faculties;
     }
 
-    // Lấy khoa theo ID
+    /**
+     * Get faculty by ID
+     */
     public Faculty getFacultyById(int id) {
-        for (Faculty faculty : mockData) {
-            if (faculty.getId() == id) {
-                return faculty;
+        String sql = "SELECT id, name, description, created_at, updated_at FROM faculty WHERE id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return extractFacultyFromResultSet(rs);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    // Thêm khoa
-    public void addFaculty(Faculty faculty) {
-        faculty.setId(nextId++);
-        mockData.add(faculty);
-    }
-
-    // Cập nhật khoa
-    public void updateFaculty(Faculty faculty) {
-        for (int i = 0; i < mockData.size(); i++) {
-            if (mockData.get(i).getId() == faculty.getId()) {
-                mockData.set(i, faculty);
-                break;
+    /**
+     * Create faculty (Super Admin only)
+     */
+    public boolean createFaculty(Faculty faculty) {
+        String sql = "INSERT INTO faculty (name, description) VALUES (?, ?)";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            stmt.setString(1, faculty.getName());
+            stmt.setString(2, faculty.getDescription());
+            
+            int rowsAffected = stmt.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    faculty.setId(rs.getInt(1));
+                }
+                return true;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
-    // Xóa khoa
-    public void deleteFaculty(int id) {
-        mockData.removeIf(faculty -> faculty.getId() == id);
+    /**
+     * Update faculty
+     */
+    public boolean updateFaculty(Faculty faculty) {
+        String sql = "UPDATE faculty SET name = ?, description = ? WHERE id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, faculty.getName());
+            stmt.setString(2, faculty.getDescription());
+            stmt.setInt(3, faculty.getId());
+            
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Delete faculty (Super Admin only)
+     * Note: This will also delete all related admins and majors due to CASCADE
+     */
+    public boolean deleteFaculty(int id) {
+        String sql = "DELETE FROM faculty WHERE id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Get faculty statistics
+     */
+    public int getMajorCountByFaculty(int facultyId) {
+        String sql = "SELECT COUNT(*) FROM major WHERE faculty_id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, facultyId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * Get news count by faculty
+     */
+    public int getNewsCountByFaculty(int facultyId) {
+        String sql = "SELECT COUNT(*) FROM news WHERE faculty_id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, facultyId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     * Extract Faculty object from ResultSet
+     */
+    private Faculty extractFacultyFromResultSet(ResultSet rs) throws SQLException {
+        Faculty faculty = new Faculty();
+        faculty.setId(rs.getInt("id"));
+        faculty.setName(rs.getString("name"));
+        faculty.setDescription(rs.getString("description"));
+        faculty.setCreatedAt(rs.getTimestamp("created_at"));
+        faculty.setUpdatedAt(rs.getTimestamp("updated_at"));
+        
+        return faculty;
+    }
+
+    public void addFaculty(Faculty faculty) {
+
     }
 }
