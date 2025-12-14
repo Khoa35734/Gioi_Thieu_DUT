@@ -14,8 +14,8 @@
         <div class="carousel-inner">
             <!-- Slide 1 -->
             <div class="carousel-item active">
-                <img src="${pageContext.request.contextPath}/assets/img/banner-1.jpg" 
-                     class="d-block w-100" 
+                <img src="${pageContext.request.contextPath}/assets/img/banner-1.jpg"
+                     class="d-block w-100"
                      alt="Trường Đại học Bách Khoa Đà Nẵng"
                      onerror="this.src='https://via.placeholder.com/1920x700/005FB7/ffffff?text=Dai+hoc+Bach+Khoa+Da+Nang'">
                 <div class="carousel-caption">
@@ -142,6 +142,7 @@
     bottom: 0;
     background: linear-gradient(135deg, rgba(0, 95, 183, 0.85) 0%, rgba(0, 61, 130, 0.75) 100%);
     z-index: 1;
+    display: none;
 }
 
 .banner-section .carousel-caption {
@@ -268,6 +269,74 @@
     
     .banner-section .carousel-caption h2 {
         font-size: 1.2rem;
+    }
+}
+/* css */
+/* reset body margin, remove header/banners gaps and possible decorative strips */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ensure header doesn't leave space below */
+.site-header,
+.site-header * {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ensure banner starts flush under header */
+.banner-section {
+    margin-top: 0 !important;
+}
+
+/* remove small decorative pseudo elements or shadows */
+.site-header::before,
+.site-header::after,
+.banner-section::before,
+.header-decorator,
+.top-decorator {
+    display: none !important;
+    content: none !important;
+}
+
+/* if header is fixed and Bootstrap added body padding, remove it (use carefully) */
+body.has-navbar-fixed-top,
+body {
+    padding-top: 0 !important;
+}
+
+/* remove visible box-shadow that may look like a gap */
+.site-header .navbar,
+.site-header {
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+/* css - add inside the <style> block in `src/main/webapp/components/banner.jsp` */
+.banner-section .carousel-caption .container > .row > .col-lg-10 {
+    background: rgba(0, 22, 45, 0.45); /* semi-transparent dark blue for contrast */
+    border-radius: 18px;               /* rounded frame */
+    padding: 1.8rem 2.2rem;            /* inner spacing so text doesn't touch edges */
+    display: inline-block;             /* shrink to fit text width */
+    backdrop-filter: blur(6px);        /* soft blur of underlying image (optional) */
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    z-index: 3;                        /* ensure it sits above the gradient overlay */
+}
+
+/* keep headings visually prominent with existing colors, but ensure contrast */
+.banner-section .carousel-caption h1,
+.banner-section .carousel-caption h2,
+.banner-section .carousel-caption p {
+    color: inherit; /* keep current color rules (yellow/white) */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+}
+
+/* responsive: smaller padding and radius on narrow screens */
+@media (max-width: 768px) {
+    .banner-section .carousel-caption .container > .row > .col-lg-10 {
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
     }
 }
 </style>

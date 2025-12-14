@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${news.title} - ĐH Bách Khoa Đà Nẵng</title>
+    <title>${news.title} - ĐH Bách Khoa - ĐH Đà Nẵng</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <div class="container">
-                <h1>Trường Đại Học Bách Khoa - Đại học Đà Nẵng</h1>
+                <h1>Trường Đại Học Bách Khoa - ĐH Đà Nẵng </h1>
                 <ul class="menu">
                     <li><a href="${pageContext.request.contextPath}/home">Trang Chủ</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp">Giới Thiệu</a></li>
@@ -48,7 +48,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Trường Đại Học Bách Khoa - Đại học Đà Nẵng. All rights reserved.</p>
+            <p>&copy; 2024 Trường Đại Học Bách Khoa. All rights reserved.</p>
         </div>
     </footer>
 </body>
